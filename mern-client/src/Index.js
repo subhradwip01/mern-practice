@@ -3,10 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 ReactDOM.render(
-  <Router>
-    <Provider store={store}>
+  <React.StrictMode>
     <App />
-    </Provider>
-  </Router>,
+    </React.StrictMode>,
   document.getElementById("root")
 );
