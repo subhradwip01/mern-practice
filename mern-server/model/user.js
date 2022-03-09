@@ -18,7 +18,7 @@ const userSchema = new Schema(
     mobile: {
       type: String,
       required: true,
-    },
+    }
   },
   {
     timestamps: true,
