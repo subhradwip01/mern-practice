@@ -7,7 +7,7 @@ const Contact = () => {
       <div className="container mt-5" style={{"height":"100%"}}>
         <div className="row mb-5">
           <div className="col">
-            <div className="card px-4 py-3 d-flex flex-row align-items-center" style={{"borderRadius":"30px"}}>
+            <div className="card px-4 py-3 d-flex flex-row align-items-center mb-3" style={{"borderRadius":"30px"}}>
               <div className="me-4">
 
               <BiPhoneCall size={40}/>
@@ -20,7 +20,7 @@ const Contact = () => {
             </div>
             </div>
             <div className="col">
-            <div className="card px-4 py-3 d-flex flex-row align-items-center" style={{"borderRadius":"30px"}}>
+            <div className="card px-4 py-3 d-flex flex-row align-items-center mb-3" style={{"borderRadius":"30px"}}>
               <div className="me-4">
               <BiMailSend size={40}/>
               </div>
@@ -31,7 +31,7 @@ const Contact = () => {
             </div>
             </div>
             <div className="col">
-            <div className="card px-4 py-3 d-flex flex-row align-items-center" style={{"borderRadius":"30px"}}>
+            <div className="card px-4 py-3 d-flex flex-row align-items-center mb-3" style={{"borderRadius":"30px"}}>
               <div className="me-4">
               <BiMap size={40}/>
               </div>
