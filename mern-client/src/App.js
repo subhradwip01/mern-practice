@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navbar , Home , Contact, About, Signup , Login, } from './components'
 import { Route,Switch } from 'react-router-dom'
+import "./App.css"
 
 const App = () => {
   return (
