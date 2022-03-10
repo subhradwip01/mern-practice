@@ -30,7 +30,7 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Navbar
+            MERN
           </Link>
           <button
             className="navbar-toggler"
@@ -45,7 +45,7 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto px-4">
-              {navList.map((nav,i) => (
+              {navList.map((nav, i) => (
                 <li key={i} className="nav-item">
                   <Link className="nav-link" to={nav.path}>
                     {nav.name}
