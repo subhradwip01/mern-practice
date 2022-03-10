@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Saly10 from "../images/Saly-10.png"
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -34,8 +35,9 @@ const Login = () => {
       
       
       <button type="submit" class="btn btn-primary mt-3">
-        Submit
+        Login
       </button>
+      
     </form>
       </div>
       <div className="col-4 d-flex justify-content-center align-items-center">

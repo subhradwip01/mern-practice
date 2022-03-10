@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import Saly44 from "../images/Saly-44.png"
+import Saly44 from "../images/Saly-44.png";
+import { Link } from "react-router-dom";
 const Signup = () => {
   return (
     <div
@@ -49,9 +50,10 @@ const Signup = () => {
             pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
           />
         </div>
-        <button type="submit" class="btn btn-primary mt-3">
+        <button type="submit" class="btn btn-primary my-3 ">
           Submit
         </button>
+        <p>Already have a account?{" "}<span><Link to="/login">Login now</Link></span></p>
       </form>
         </div>
         <div className="col-4 d-flex justify-content-center align-items-center">
