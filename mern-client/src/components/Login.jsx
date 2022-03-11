@@ -1,9 +1,77 @@
-import React from "react";
+import React,{useState} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Saly10 from "../images/Saly-10.png"
-import { Link } from "react-router-dom";
+import { Link ,useHistory} from "react-router-dom";
 
 const Login = () => {
+  const history = useHistory();
+  const [formData,setFormData]=useState({
+    
+    password:"",
+    email:""
+    
+  })
+
+  const [loading,setLoading]=useState(false)
+  const [error,setError]=useState(null)
+  
+  const inputHandler=(e)=>{
+    setFormData(prevData=>({...prevData,[e.target.id]:e.target.value}))
+  }
+
+  const loginHandler= async (e)=>{
+    setLoading(true)
+    e.preventDefault();
+    const {
+      email,
+      password
+    } = formData
+    try {
+      const res=await fetch("http://localhost:8000/login",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        password:password,
+        email:email
+        
+        
+
+      })
+    })
+
+    if(res.status===422){
+      const data = await res.json()
+      console.log(data)
+      throw new Error(data.message)
+      
+    }
+    
+    if(res.status!==200 && res.status!==201){
+      const data = await res.json()
+      console.log(data)
+      throw new Error(data.message)
+
+    }
+    const data = await res.json()
+
+    setError(null)
+    setLoading(false)
+    localStorage.setItem("token",data.token)
+    window.alert("Login Successsfull")
+    history.push("/")
+
+    console.log(res)
+    } catch (err) {
+      console.log(err.message)
+      setLoading(false)
+      setError(err.message)
+      window.alert(err.message)
+    }
+    
+  }
+
   return (
     <div
     className="d-flex justify-content-center align-items-center"
@@ -21,6 +89,8 @@ const Login = () => {
           class="form-control"
           id="email"
           placeholder="Email"
+          value={formData.email}
+            onChange={inputHandler}
         />
       </div>
       <div class="form-group mt-3">
@@ -28,15 +98,18 @@ const Login = () => {
         <input
           type="password"
           class="form-control"
-          id="c-password"
+          id="password"
           placeholder="Password"
+          value={formData.password}
+          onChange={inputHandler}
         />
       </div>
       
       
-      <button type="submit" class="btn btn-primary mt-3">
-        Login
-      </button>
+      <button type="submit" class={`btn btn-primary my-3 ${loading ? "disabled" : ""}`} onClick={loginHandler}>
+          {!loading && "Login"}
+          {loading && "Loading..."} 
+        </button>
       
     </form>
       </div>

@@ -8,6 +8,7 @@ exports.postSignUp = async (req, res, next) => {
   const password = req.body.password;
   const email = req.body.email;
   const mobile = req.body.mobile;
+  const address = req.body.address;
 
   if (!name || !password || !email || !mobile) {
     return res.status(422).json({
@@ -22,6 +23,7 @@ exports.postSignUp = async (req, res, next) => {
     password: hashedPasword,
     email,
     mobile,
+    address
   });
 
   try {
@@ -41,8 +43,6 @@ exports.postSignUp = async (req, res, next) => {
       userId: result._id,
     });
   } catch (e) {
-    e.message = "Something went wrong";
-    e.statusCode = 500;
     next(e);
   }
 };
@@ -78,10 +78,8 @@ exports.postLogin = async (req, res, next) => {
       },
       process.env.PRIVATE_KEY,
     );
-    res.cookie("token",token,{
-       expires: new Date(Date.now() + 3600000),
-       httpOnly:true 
-    })
+    res.cookie("token_id",token)
+    console.log("done")
     res.status(201).json({
       message: "Login Successful",
       token:token

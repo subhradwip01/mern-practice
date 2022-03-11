@@ -18,7 +18,18 @@ const userSchema = new Schema(
     mobile: {
       type: String,
       required: true,
-    }
+    },
+    address:{
+      type:String,
+      require:true
+    },
+    notes:[
+      {
+        note:{
+          type:String
+        }
+      }
+  ]
   },
   {
     timestamps: true,
