@@ -68,8 +68,8 @@ const Home = () => {
          
         </>
       )}
-      {atx.isAuth && !notes && <p>No Notes is Here May be you can add === <Link to="/contact">Contact</Link> ✍ </p>}
-      {notes && (
+      {atx.isAuth && notes?.length<=0 && <p>No Notes is Here May be you can add === <Link to="/contact">Contact</Link> ✍ </p>}
+      {notes?.length>0 && (
         <div className="container mt-5">
           <table>
             <tr>

@@ -129,7 +129,7 @@ const Signup = () => {
           />
         </div>
         <div class="form-group mt-3">
-          <label for="address">Mobile</label>
+          <label for="address">Address</label>
           <input
             type="test"
             class="form-control"
