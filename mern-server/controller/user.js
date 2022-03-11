@@ -8,7 +8,12 @@ exports.getUserInfo=(req,res,next)=>{
 
 exports.postMessage=async (req,res,next)=>{
     const uid=req.userId;
-    const {message}=req.body;
+    const message=req.body.message;
+    if(!message){
+        return res.status(422).json({
+            message: "Plese provide valid values",
+          });
+    }
     try {
         const user = await User.findById(uid)
         if(!user){
@@ -16,10 +21,9 @@ exports.postMessage=async (req,res,next)=>{
             err.statusCode = 422;
             throw err;
         }
-        user.notes.push({message:message})
-        await user.save()
+        const result= await user.addMessage(message)
         res.status(201).json({
-            message:"Succesfull"
+            message:result
         })
     } catch (e) {
         next(e)

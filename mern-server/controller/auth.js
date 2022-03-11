@@ -10,7 +10,7 @@ exports.postSignUp = async (req, res, next) => {
   const mobile = req.body.mobile;
   const address = req.body.address;
 
-  if (!name || !password || !email || !mobile) {
+  if (!name || !password || !email || !mobile || !address) {
     return res.status(422).json({
       message: "Plese provide valid values",
     });
@@ -79,7 +79,6 @@ exports.postLogin = async (req, res, next) => {
       process.env.PRIVATE_KEY,
     );
     res.cookie("token_id",token)
-    console.log("done")
     res.status(201).json({
       message: "Login Successful",
       token:token

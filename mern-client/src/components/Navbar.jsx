@@ -1,9 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+import { AuthContext } from "../store/auth-context";
 
 const Navbar = () => {
-  const navList = [
+  const atx=useContext(AuthContext)
+  const history=useHistory();
+  const authList = [
     {
       name: "Home",
       path: "/",
@@ -11,6 +14,12 @@ const Navbar = () => {
     {
       name: "Contact",
       path: "/contact",
+    },
+  ];
+  const nauthList=[
+    {
+      name: "Home",
+      path: "/",
     },
     {
       name: "Login",
@@ -20,7 +29,13 @@ const Navbar = () => {
       name: "Signup",
       path: "/signup",
     },
-  ];
+  ]
+
+  const navList=atx.isAuth ? authList :  nauthList
+  const logouthandler = () => {
+    atx.logout()
+    history.push("/login")
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,6 +65,7 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
+            {atx.isAuth && <button className="btn btn-danger" onClick={logouthandler}>Logout</button>}
           </div>
         </div>
       </nav>

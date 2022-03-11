@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BiPhoneCall, BiMailSend, BiMap, BiWindows } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
+import { AuthContext } from "../store/auth-context";
 
 const Contact = () => {
-  const localToken = localStorage.getItem("token");
+  const atx=useContext(AuthContext)
   const history = useHistory();
-  const [token, setToken] = useState(localToken || null);
   const [userData, setUserData] = useState(undefined);
   const [message, setMessage] = useState("");
   const [loding, setIsloading] = useState(false);
-  useEffect(() => {
-    if (localToken) {
-      setToken(localToken);
-    }
-  }, [localToken]);
-
-  console.log(token);
 
   const getUserInfo = async () => {
     try {
       const res = await fetch("http://localhost:8000/getinfo", {
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: "Bearer " + atx.token,
         },
       });
       
@@ -31,7 +24,6 @@ const Contact = () => {
       }
 
       const data = await res.json();
-      console.log(data);
       setUserData(data);
     } catch (err) {
       console.log(err.message);
@@ -45,16 +37,18 @@ const Contact = () => {
   const messageSender = async (e) => {
     e.preventDefault();
     setIsloading(true);
-    console.log(userData.email)
+    console.log(message)
     try {
       const res = await fetch("http://localhost:8000/sendmessage", {
         method: "POST",
+        
+        headers: {
+          Authorization: "Bearer " + atx.token,
+          "Content-Type":"application/json"
+        },
         body: JSON.stringify({
           message: message
-        }),
-        headers: {
-          Authorization: "Bearer " + token,
-        },
+        })
       });
       console.log(res.status)
 
@@ -64,7 +58,6 @@ const Contact = () => {
       }
 
       const data = await res.json();
-      console.log(data);
       setIsloading(false);
       window.alert("Notes added Succesfully")
       setMessage("")

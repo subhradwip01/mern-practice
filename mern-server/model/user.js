@@ -27,6 +27,9 @@ const userSchema = new Schema(
       {
         note:{
           type:String
+        },
+        time:{
+          type:String
         }
       }
   ]
@@ -35,5 +38,19 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+userSchema.methods.addMessage = async function(message){
+  try {
+    const updatedNotes=[...this.notes];
+    updatedNotes.push({
+      note:message,
+      time:new Date().getTime()
+    })
+    this.notes=updatedNotes;
+    return this.save()
+  } catch (e) {
+    console.log(e.message)
+  }
+}
 
 module.exports = mongoose.model("User", userSchema);
